@@ -40,3 +40,20 @@
 .read-the-docs {
   color: #888;
 }
+
+.PGliteRepl-root {
+  height: 350px;
+  text-align: left;
+}
+
+.click-count {
+  display: inline-block;
+  min-width: 32px;
+  pointer-events: none;
+}
+
+.copyable-code code {
+  background-color: #333338;
+  color: #CCCCCC;
+  padding: 0.6em 1.2em;
+}

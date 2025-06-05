@@ -1,6 +1,8 @@
-# React + TypeScript + Vite
+# Vite + React + PGlite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[Demo](https://coworkersimulator.github.io/vite-react-pglite/)
+
+This template provides a minimal setup to get React and PGlite with multi-tab worker working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
 
