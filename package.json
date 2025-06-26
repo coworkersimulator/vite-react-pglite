@@ -10,13 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@electric-sql/pglite": "^0.3.3",
-    "@electric-sql/pglite-repl": "^0.2.21",
+    "@electric-sql/pglite": "^0.3.4",
+    "@electric-sql/pglite-repl": "^0.2.22",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
-    "@electric-sql/pglite-react": "^0.2.21",
+    "@electric-sql/pglite-react": "^0.2.22",
     "@eslint/js": "^9.29.0",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
