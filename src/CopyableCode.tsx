@@ -2,9 +2,7 @@ export function CopyableCode({ code }: { code: string }) {
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(code);
-    } catch (err) {
-
-    }
+    } catch (err) {}
   };
 
   return (

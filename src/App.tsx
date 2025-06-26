@@ -12,27 +12,25 @@ import Counters from './Counters'
 import PgWorker from './pglite-worker.ts?worker'
 import viteLogo from '/vite.svg'
 
-let dbGlobal: PGliteWithLive | undefined;
-
 function App() {
-  const [db, setDb] = useState<PGliteWithLive | undefined>();
+  const [db, setDb] = useState<PGliteWorker | undefined>();
 
   useEffect(() => {
-    (async () => {
-      dbGlobal ??= new PGliteWorker(
-        new PgWorker({
-          name: 'pglite-worker'
-        }),
-        {
-          extensions: { live }
-        }
-      ) as unknown as PGliteWithLive;
+    const dbWorker = new PGliteWorker(
+      new PgWorker({
+        name: 'pglite-worker'
+      }),
+      {
+        extensions: { live }
+      }
+    );
 
-      await dbGlobal.exec(migration01);
+    dbWorker.exec(migration01).then(() => setDb(dbWorker));
 
-      setDb(dbGlobal);
-    })()
-  }, [])
+    return () => {
+      dbWorker?.close();
+    };
+  }, []);
 
   return (
     <>
@@ -48,17 +46,17 @@ function App() {
         </a>
       </div>
       <h1>Vite + React + PGlite</h1>
-      <div className='card'>
+      <div className="card">
         {!db && <>Loading PGlite...</>}
         {db && (
-          <PGliteProvider db={db}>
+          <PGliteProvider db={db as unknown as PGliteWithLive}>
             <>
               <Counters />
               <Repl pg={db} />
             </>
             <div>
               <p>
-                <a href='https://github.com/coworkersimulator/vite-react-pglite'>
+                <a href="https://github.com/coworkersimulator/vite-react-pglite">
                   View on GitHub.
                 </a>
                 Try SQL in the terminal above. Examples:
@@ -77,7 +75,7 @@ function App() {
         Click on the Vite, React, and PGlite logos to learn more
       </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -14,7 +14,7 @@ export function Counters() {
 
   const click = async (event: React.MouseEvent<HTMLElement>) => {
     await db.query('INSERT INTO click ("on") VALUES ($1)', [
-      (event.target as HTMLElement).dataset.id,
+      (event.target as HTMLElement).dataset.id
     ]);
   };
   return (
