@@ -1,16 +1,16 @@
-import { PGliteProvider } from '@electric-sql/pglite-react'
-import { Repl } from '@electric-sql/pglite-repl'
-import { live, type PGliteWithLive } from '@electric-sql/pglite/live'
-import { PGliteWorker } from '@electric-sql/pglite/worker'
-import { useEffect, useState } from 'react'
-import migration01 from '../db/migrations-client/01-initialize.sql?raw'
-import './App.css'
-import pgliteLogo from './assets/pglite-light.svg'
-import reactLogo from './assets/react.svg'
-import { CopyableCode } from './CopyableCode'
-import Counters from './Counters'
-import PgWorker from './pglite-worker.ts?worker'
-import viteLogo from '/vite.svg'
+import { PGliteProvider } from '@electric-sql/pglite-react';
+import { Repl } from '@electric-sql/pglite-repl';
+import { live, type PGliteWithLive } from '@electric-sql/pglite/live';
+import { PGliteWorker } from '@electric-sql/pglite/worker';
+import { useEffect, useState } from 'react';
+import migration01 from '../db/migrations-client/01-initialize.sql?raw';
+import './App.css';
+import pgliteLogo from './assets/pglite-light.svg';
+import reactLogo from './assets/react.svg';
+import { CopyableCode } from './CopyableCode';
+import Counters from './Counters';
+import PgWorker from './pglite-worker.ts?worker';
+import viteLogo from '/vite.svg';
 
 function App() {
   const [db, setDb] = useState<PGliteWorker | undefined>();

@@ -1,6 +1,6 @@
 import { PGlite } from '@electric-sql/pglite';
 import { worker } from '@electric-sql/pglite/worker';
-import { uuid_ossp } from '@electric-sql/pglite/contrib/uuid_ossp'
+import { uuid_ossp } from '@electric-sql/pglite/contrib/uuid_ossp';
 
 worker({
   async init() {
@@ -10,5 +10,5 @@ worker({
       extensions: { uuid_ossp },
       relaxedDurability: true
     });
-  },
+  }
 });
