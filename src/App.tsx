@@ -25,7 +25,11 @@ function App() {
       }
     );
 
-    dbWorker.exec(migration01).then(() => setDb(dbWorker));
+    async function migrate() {
+      await dbWorker.exec(migration01);
+    }
+
+    migrate().then(() => setDb(dbWorker));
 
     return () => {
       dbWorker?.close();
