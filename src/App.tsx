@@ -49,7 +49,7 @@ function App() {
           <img src={pgliteLogo} className="logo pglite" alt="PGlite logo" />
         </a>
       </div>
-      <h1>Vite + React + PGlite</h1>
+      <h1>Vite + React + TypeScript + PGlite</h1>
       <div className="card">
         {!db && <>Loading PGlite...</>}
         {db && (
