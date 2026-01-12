@@ -5,7 +5,6 @@ import { uuid_ossp } from '@electric-sql/pglite/contrib/uuid_ossp';
 worker({
   async init() {
     return new PGlite({
-      database: 'postgres',
       dataDir: 'idb://pglite-example',
       extensions: { uuid_ossp },
       relaxedDurability: true
