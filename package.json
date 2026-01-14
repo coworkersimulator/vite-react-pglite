@@ -12,6 +12,7 @@
   "dependencies": {
     "@electric-sql/pglite": "^0.3.14",
     "@electric-sql/pglite-repl": "^0.2.32",
+    "js-confetti": "^0.13.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
   },

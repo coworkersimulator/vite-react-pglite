@@ -7,13 +7,14 @@ import migration01 from '../db/migrations-client/01-initialize.sql?raw'
 import './App.css'
 import pgliteLogo from './assets/pglite-light.svg'
 import reactLogo from './assets/react.svg'
+import Confetti from './Confetti'
 import { CopyableCode } from './CopyableCode'
 import Counters from './Counters'
 import PgWorker from './pglite-worker.ts?worker'
 import viteLogo from '/vite.svg'
 
 function App() {
-  const [db, setDb] = useState<PGliteWorker | undefined>()
+  const [db, setDb] = useState<PGliteWithLive | undefined>()
 
   useEffect(() => {
     const dbWorker = new PGliteWorker(
@@ -23,7 +24,7 @@ function App() {
       {
         extensions: { live },
       },
-    )
+    ) as unknown as PGliteWithLive
 
     async function migrate() {
       await dbWorker.exec(migration01)
@@ -53,8 +54,9 @@ function App() {
       <div className="card">
         {!db && <>Loading PGlite...</>}
         {db && (
-          <PGliteProvider db={db as unknown as PGliteWithLive}>
+          <PGliteProvider db={db}>
             <>
+              <Confetti />
               <Counters />
               <Repl pg={db} />
             </>
