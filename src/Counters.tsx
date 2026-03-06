@@ -22,7 +22,7 @@ export function Counters() {
       {(clickCounts?.rows as { id: string; count: number }[])?.map(
         ({ id, count }) => {
           return (
-            <button key={id} data-id={id}>
+            <button className="counter" key={id} data-id={id}>
               {id}
               <span className="click-count">{count}</span>
             </button>
