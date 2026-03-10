@@ -1,29 +1,30 @@
-import { usePGlite } from '@electric-sql/pglite-react'
+import { useLiveIncrementalQuery } from '@electric-sql/pglite-react'
 import JSConfetti from 'js-confetti'
+import { useState } from 'react'
+
+type Click = {
+  id: string
+  on: string
+  at: Date
+}
+
 const jsConfetti = new JSConfetti()
 
-const start = new Date()
-
 export function Confetti() {
-  const db = usePGlite()
-
-  db.live.changes(
+  const [lastClickAt, setLastClickAt] = useState<Date>(new Date())
+  const changes = useLiveIncrementalQuery<Click>(
     'SELECT * FROM click ORDER BY at DESC LIMIT 1',
     [],
     'id',
-    (changes) => {
-      const emojis = changes.flatMap(({ __op__, at, on }) => {
-        if (__op__ === 'INSERT' && at > start && on) {
-          return on
-        }
-        return []
-      })
-      if (!emojis.length) {
-        return
-      }
-      jsConfetti.addConfetti({ confettiNumber: 1, emojis })
-    },
   )
+
+  changes?.rows.forEach(({ on, at }) => {
+    if (at > lastClickAt) {
+      setLastClickAt(at)
+      jsConfetti.addConfetti({ confettiNumber: 1, emojis: [on as string] })
+    }
+  })
+
   return <></>
 }
 

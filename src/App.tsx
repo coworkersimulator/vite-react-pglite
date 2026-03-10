@@ -66,10 +66,12 @@ function App() {
                 </p>
                 <CopyableCode code="SELECT * FROM click;" />
                 <CopyableCode code="SELECT * FROM fruit;" />
-                <CopyableCode code="INSERT INTO fruit (id) VALUES ('🍅');" />
                 <CopyableCode
-                  code={`DELETE FROM click WHERE "on" = '🍅'; DELETE FROM fruit WHERE id = '🍅';`}
+                  code={`INSERT INTO click ("on") VALUES ('🥥');`}
                 />
+                <CopyableCode code="INSERT INTO fruit (id) VALUES ('🍅');" />
+                <CopyableCode code={`DELETE FROM click WHERE "on" = '🍅';`} />
+                <CopyableCode code="DELETE FROM fruit WHERE id = '🍅';" />
                 <CopyableCode code="DELETE FROM click;" />
               </div>
             </PGliteProvider>
