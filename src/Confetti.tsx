@@ -1,6 +1,6 @@
 import { useLiveIncrementalQuery } from '@electric-sql/pglite-react'
 import JSConfetti from 'js-confetti'
-import { useState } from 'react'
+import { useRef } from 'react'
 
 type Click = {
   id: string
@@ -8,20 +8,28 @@ type Click = {
   at: Date
 }
 
-const jsConfetti = new JSConfetti()
-
 export function Confetti() {
-  const [lastClickAt, setLastClickAt] = useState<Date>(new Date())
+  const confetti = new JSConfetti()
+  const lastClick = useRef<Click>({
+    id: '',
+    on: '',
+    at: new Date(),
+  })
+
   const changes = useLiveIncrementalQuery<Click>(
     'SELECT * FROM click ORDER BY at DESC LIMIT 1',
     [],
     'id',
   )
+  console.log(JSON.stringify(changes))
 
-  changes?.rows.forEach(({ on, at }) => {
-    if (at > lastClickAt) {
-      setLastClickAt(at)
-      jsConfetti.addConfetti({ confettiNumber: 1, emojis: [on as string] })
+  changes?.rows.map(({ id, on, at }) => {
+    if (at > lastClick.current.at) {
+      lastClick.current = { id, on, at }
+      confetti.addConfetti({
+        confettiNumber: 1,
+        emojis: [lastClick.current.on],
+      })
     }
   })
 
