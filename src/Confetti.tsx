@@ -17,21 +17,23 @@ export function Confetti() {
   })
 
   const changes = useLiveIncrementalQuery<Click>(
-    'SELECT * FROM click ORDER BY at DESC LIMIT 1',
+    'SELECT * FROM click ORDER BY at DESC LIMIT 20',
     [],
     'id',
   )
-  console.log(JSON.stringify(changes))
 
-  changes?.rows.map(({ id, on, at }) => {
+  changes?.rows.toReversed().map(({ on, at }) => {
     if (at > lastClick.current.at) {
-      lastClick.current = { id, on, at }
       confetti.addConfetti({
         confettiNumber: 1,
-        emojis: [lastClick.current.on],
+        emojis: [on],
       })
     }
   })
+
+  if (changes?.rows.length) {
+    lastClick.current = changes.rows[0]
+  }
 
   return <></>
 }

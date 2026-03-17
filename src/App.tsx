@@ -69,6 +69,9 @@ function App() {
                 <CopyableCode
                   code={`INSERT INTO click ("on") VALUES ('🥥');`}
                 />
+                <CopyableCode
+                  code={`INSERT INTO click ("on") VALUES ('🍋‍🟩'), ('🥥');`}
+                />
                 <CopyableCode code="INSERT INTO fruit (id) VALUES ('🍅');" />
                 <CopyableCode code={`DELETE FROM click WHERE "on" = '🍅';`} />
                 <CopyableCode code="DELETE FROM fruit WHERE id = '🍅';" />
